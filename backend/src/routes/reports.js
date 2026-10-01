@@ -1,0 +1,1 @@
+const r=require('express').Router();const c=require('../controllers/reportsController');const {requireAuth}=require('../middleware/auth');r.use(requireAuth);r.get('/inventory',c.inventory);r.get('/movements',c.movements);r.get('/low-stock',c.lowStock);module.exports=r;

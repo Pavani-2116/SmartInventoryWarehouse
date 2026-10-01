@@ -1,0 +1,1 @@
+const r=require('express').Router();const c=require('../controllers/purchaseOrdersController');const {requireAuth,allowRoles}=require('../middleware/auth');r.use(requireAuth);r.get('/',c.list);r.post('/',allowRoles('admin','manager'),c.create);r.put('/:id',allowRoles('admin','manager'),c.update);module.exports=r;

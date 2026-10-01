@@ -1,0 +1,5 @@
+const db=require('../config/db');
+exports.list=(req,res)=>res.json({suppliers:db.prepare('SELECT * FROM suppliers ORDER BY name').all()});
+exports.create=(req,res)=>{const {name,contact_person='',email='',phone='',address=''}=req.body;if(!name)return res.status(400).json({message:'Supplier name is required'});const r=db.prepare('INSERT INTO suppliers(name,contact_person,email,phone,address) VALUES(?,?,?,?,?)').run(name,contact_person,email,phone,address);res.status(201).json({supplier:db.prepare('SELECT * FROM suppliers WHERE id=?').get(r.lastInsertRowid)})};
+exports.update=(req,res)=>{const {name,contact_person='',email='',phone='',address=''}=req.body;if(!name)return res.status(400).json({message:'Supplier name is required'});db.prepare('UPDATE suppliers SET name=?,contact_person=?,email=?,phone=?,address=? WHERE id=?').run(name,contact_person,email,phone,address,req.params.id);res.json({supplier:db.prepare('SELECT * FROM suppliers WHERE id=?').get(req.params.id)})};
+exports.remove=(req,res)=>{try{db.prepare('DELETE FROM suppliers WHERE id=?').run(req.params.id);res.json({message:'Supplier deleted'})}catch(e){throw e}};

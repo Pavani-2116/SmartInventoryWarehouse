@@ -1,0 +1,4 @@
+const db=require('../config/db');
+exports.inventory=(req,res)=>res.json({report:db.prepare(`SELECT p.sku,p.name,p.category,p.quantity,p.reorder_level,w.name warehouse_name,p.unit_price FROM products p JOIN warehouses w ON w.id=p.warehouse_id ORDER BY p.name`).all()});
+exports.movements=(req,res)=>res.json({report:db.prepare(`SELECT m.id,p.name product_name,p.sku,m.type,m.quantity,m.previous_quantity,m.new_quantity,w.name warehouse_name,u.name performed_by_name,m.reference,m.created_at FROM stock_movements m JOIN products p ON p.id=m.product_id JOIN warehouses w ON w.id=m.warehouse_id JOIN users u ON u.id=m.performed_by ORDER BY m.created_at DESC`).all()});
+exports.lowStock=(req,res)=>res.json({report:db.prepare(`SELECT p.sku,p.name,p.quantity,p.reorder_level,w.name warehouse_name FROM products p JOIN warehouses w ON w.id=p.warehouse_id WHERE p.quantity <= p.reorder_level ORDER BY p.quantity`).all()});

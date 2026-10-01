@@ -1,0 +1,1 @@
+const r=require('express').Router();const c=require('../controllers/stockController');const {requireAuth,allowRoles}=require('../middleware/auth');r.use(requireAuth);r.post('/in',allowRoles('admin','manager','staff'),c.move('IN'));r.post('/out',allowRoles('admin','manager','staff'),c.move('OUT'));r.get('/movements',c.movements);module.exports=r;
