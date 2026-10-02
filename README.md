@@ -1,306 +1,852 @@
 # Smart Inventory & Warehouse Management System
 
-Evaluation-ready full-stack assignment implementation using **ReactJS + Node.js + Express + SQLite**.
+A full-stack web application for managing products, inventory, stock movements, suppliers, purchase orders, and warehouses.
 
-## Features
+This project is built using React.js, Node.js, Express.js, and SQLite. It includes JWT authentication, role-based access control, inventory management, stock tracking, supplier management, warehouse management, purchase orders, dashboards, and reports.
 
-- JWT authentication and RBAC: Admin, Warehouse Manager, Staff
-- Product inventory management
-- Stock IN / OUT with transactional SQLite logic
+---
+
+## 📌 Project Overview
+
+The Smart Inventory & Warehouse Management System is a web-based application designed to simplify inventory and warehouse operations.
+
+The application allows authorized users to:
+
+- Manage products
+- Track product inventory
+- Perform stock IN operations
+- Perform stock OUT operations
+- Prevent negative stock
+- Track stock movement history
+- Manage suppliers
+- Create purchase orders
+- Receive purchase orders
+- Manage warehouses
+- Monitor low-stock products
+- View inventory reports
+- View stock movement reports
+- Export report data
+- Manage access using user roles
+
+The project follows a frontend and backend architecture where the React frontend communicates with the Node.js and Express backend through REST APIs.
+
+---
+
+# 🚀 Features
+
+## 🔐 Authentication & Authorization
+
+- JWT-based authentication
+- Secure login
+- Protected routes
+- Role-based access control
+- Admin role
+- Manager role
+- Staff role
+- Password hashing using bcrypt
+- Authenticated API requests
+
+---
+
+## 📦 Product & Inventory Management
+
+- View products
+- Add products
+- Edit products
+- Delete products
+- Product SKU management
+- Product category management
+- Product unit management
+- Product price management
+- Product quantity management
+- Reorder level management
+- Warehouse assignment
+- Supplier assignment
+- Low-stock identification
+- Inventory filtering
+
+---
+
+## 🔄 Stock Management
+
+- Stock IN
+- Stock OUT
+- Stock quantity validation
 - Negative-stock prevention
-- Stock movement history with previous/new quantities
-- Supplier management
-- Purchase orders with safe receiving (prevents double inventory addition)
-- Warehouse management
-- Dashboard KPIs, movement chart, category distribution and low-stock alerts
-- Inventory filters by category and stock level
-- Reports with CSV export
-- Barcode/SKU scanning simulation
-- Responsive SaaS-style UI
-- Frontend and backend validation
-- Loading, empty, error and success states
-- Seed/demo data
-- `.env.example` files
+- Stock movement tracking
+- Warehouse tracking
+- User tracking
+- Movement reference
+- Movement date tracking
 
-## Tech Stack
+---
 
-Frontend: React, Vite, React Router, Axios, Recharts, Lucide React  
-Backend: Node.js, Express, JWT, bcryptjs, better-sqlite3  
-Database: SQLite
+## 🚚 Supplier Management
 
-## Architecture
+- Add suppliers
+- View suppliers
+- Edit suppliers
+- Delete suppliers
+- Supplier name
+- Supplier email
+- Supplier phone
+- Supplier address
 
-React UI → Express REST API → Services/Controllers → SQLite → API response → React UI.
+---
 
-Important inventory mutations use SQLite transactions. Stock OUT is rejected when requested quantity exceeds current quantity.
+## 🧾 Purchase Order Management
 
-## Folder Structure
+- Create purchase orders
+- Select supplier
+- Select warehouse
+- Select products
+- Set product quantity
+- Set product unit price
+- View purchase orders
+- Receive purchase orders
+- Update inventory when purchase orders are received
 
-```text
-smart-inventory-warehouse/
-├── frontend/
-│   ├── src/
-│   └── package.json
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   ├── controllers/
-│   │   ├── database/
-│   │   ├── middleware/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   └── utils/
-│   └── package.json
-├── documentation/
-├── README.md
-└── .gitignore
-```
+---
+
+## 🏢 Warehouse Management
+
+- Add warehouses
+- View warehouses
+- Edit warehouses
+- Delete warehouses
+- Warehouse name
+- Warehouse code
+- Warehouse location
+- Current stock information
+- Product count
+- Low-stock information
+
+---
+
+## 📊 Dashboard
+
+The dashboard provides an overview of the inventory system.
+
+It includes:
+
+- Total products
+- Current stock
+- Low-stock products
+- Out-of-stock information
+- Warehouse count
+- Supplier count
+- Stock IN information
+- Stock OUT information
+- Inventory statistics
+- Charts and visual information
+
+---
+
+## 📈 Reports
+
+The application provides:
+
+- Inventory reports
+- Stock movement reports
+- Low-stock reports
+- CSV export
+
+---
+
+## 🎨 User Interface
+
+The application includes:
+
+- Responsive dashboard
+- Sidebar navigation
+- Login page
+- Dashboard cards
+- Tables
+- Forms
+- Modal windows
+- Alerts
+- Success messages
+- Error messages
+- Loading states
+- Empty states
+- Responsive layouts
+- Mobile-friendly design
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+- React.js
+- Vite
+- React Router
+- Axios
+- Recharts
+- Lucide React
+- CSS
+
+## Backend
+
+- Node.js
+- Express.js
+- JWT
+- bcryptjs
+- better-sqlite3
 
 ## Database
 
-Tables:
+- SQLite
 
-- users
-- products
-- warehouses
-- suppliers
-- stock_movements
-- inventory_logs
-- purchase_orders
-- purchase_order_items
+## Development Tools
 
-Foreign keys and indexes are configured in `backend/src/database/schema.sql`.
+- Git
+- GitHub
+- VS Code
+- Postman
+- npm
 
-## Demo Credentials
+---
 
-| Role | Email | Password |
-|---|---|---|
-| Admin | admin@inventory.local | Admin@123 |
-| Warehouse Manager | manager@inventory.local | Manager@123 |
-| Staff | staff@inventory.local | Staff@123 |
+# 🏗️ Application Architecture
 
-Passwords are hashed before storage.
-
-## Installation
-
-Requirements: Node.js 18+ recommended and npm.
-
-### Backend
-
-```bash
-cd backend
-npm install
-copy .env.example .env
-npm run db:init
-npm run db:seed
-npm run dev
-```
-
-On macOS/Linux, replace the copy command with:
-
-```bash
-cp .env.example .env
-```
-
-Backend runs at `http://localhost:5000`.
-
-### Frontend
-
-Open another terminal:
-
-```bash
-cd frontend
-npm install
-copy .env.example .env
-npm run dev
-```
-
-On macOS/Linux:
-
-```bash
-cp .env.example .env
-```
-
-Frontend runs at the Vite URL, normally `http://localhost:5173`.
-
-## Production build
-
-Frontend:
-
-```bash
-cd frontend
-npm run build
-npm run preview
-```
-
-Backend:
-
-```bash
-cd backend
-npm start
-```
-
-## API Summary
-
-### Auth
-- `POST /api/auth/login`
-- `GET /api/auth/me`
-
-### Products
-- `GET /api/products`
-- `GET /api/products/:id`
-- `POST /api/products`
-- `PUT /api/products/:id`
-- `DELETE /api/products/:id`
-
-### Stock
-- `POST /api/stock/in`
-- `POST /api/stock/out`
-- `GET /api/stock/movements`
-
-### Suppliers
-- `GET /api/suppliers`
-- `POST /api/suppliers`
-- `PUT /api/suppliers/:id`
-- `DELETE /api/suppliers/:id`
-
-### Warehouses
-- `GET /api/warehouses`
-- `POST /api/warehouses`
-- `PUT /api/warehouses/:id`
-- `DELETE /api/warehouses/:id`
-
-### Purchase Orders
-- `GET /api/purchase-orders`
-- `POST /api/purchase-orders`
-- `PUT /api/purchase-orders/:id`
-
-### Dashboard
-- `GET /api/dashboard/summary`
-
-### Reports
-- `GET /api/reports/inventory`
-- `GET /api/reports/movements`
-- `GET /api/reports/low-stock`
-
-## Environment Variables
-
-Backend `.env`:
+The application follows a frontend-backend architecture.
 
 ```text
+                    Smart Inventory System
+                            |
+                            v
+                    React Frontend
+                            |
+                            | Axios
+                            v
+                    Express REST API
+                            |
+                            v
+               Authentication / Authorization
+                            |
+                            v
+                  Controllers / Routes
+                            |
+                            v
+                    SQLite Database
+                            |
+                            v
+                 Inventory / Stock Data
+                            |
+                            v
+                    API Response
+                            |
+                            v
+                    React User Interface
+
+📁 Project Structure
+
+SmartInventoryWarehouse/
+|
+├── frontend/
+|   |
+|   ├── src/
+|   |   |
+|   |   ├── components/
+|   |   |   └── common/
+|   |   |
+|   |   ├── layouts/
+|   |   |
+|   |   ├── pages/
+|   |   |   ├── Dashboard.jsx
+|   |   |   ├── Inventory.jsx
+|   |   |   ├── StockMovements.jsx
+|   |   |   ├── Suppliers.jsx
+|   |   |   ├── PurchaseOrders.jsx
+|   |   |   ├── Warehouses.jsx
+|   |   |   ├── Reports.jsx
+|   |   |   ├── Profile.jsx
+|   |   |   └── Login.jsx
+|   |   |
+|   |   ├── routes/
+|   |   |
+|   |   ├── services/
+|   |   |
+|   |   ├── App.jsx
+|   |   └── index.css
+|   |
+|   ├── .env.example
+|   ├── package.json
+|   └── vite.config.js
+|
+├── backend/
+|   |
+|   ├── database/
+|   |   ├── db.js
+|   |   ├── schema.sql
+|   |   └── seed.js
+|   |
+|   ├── src/
+|   |   ├── config/
+|   |   ├── controllers/
+|   |   ├── middleware/
+|   |   ├── routes/
+|   |   └── utils/
+|   |
+|   ├── .env.example
+|   ├── package.json
+|   └── server.js
+|
+├── .gitignore
+└── README.md
+
+🗄️ Database
+
+The application uses SQLite as its database.
+
+The database contains the following main tables:
+
+users
+products
+warehouses
+suppliers
+stock_movements
+purchase_orders
+purchase_order_items
+inventory_logs
+Users Table
+
+The users table stores application users.
+
+It contains information such as:
+
+User ID
+Name
+Email
+Password hash
+Role
+Created date
+
+Supported roles:
+
+admin
+manager
+staff
+Products Table
+
+The products table stores inventory product information.
+
+It includes:
+
+Product ID
+SKU
+Product name
+Category
+Unit
+Quantity
+Reorder level
+Warehouse
+Supplier
+Price
+Created date
+Updated date
+Warehouses Table
+
+The warehouses table stores warehouse information.
+
+It includes:
+
+Warehouse ID
+Warehouse name
+Warehouse code
+Location
+Created date
+Suppliers Table
+
+The suppliers table stores supplier information.
+
+It includes:
+
+Supplier ID
+Supplier name
+Email
+Phone
+Address
+Created date
+Stock Movements Table
+
+The stock movements table stores inventory movement information.
+
+It includes:
+
+Movement ID
+Product
+Warehouse
+Movement type
+Quantity
+Reference
+User
+Created date
+
+Movement types are:
+
+IN
+OUT
+Purchase Orders Table
+
+The purchase orders table stores purchase order information.
+
+It includes:
+
+Purchase order ID
+Purchase order number
+Supplier
+Warehouse
+Status
+Total amount
+Ordered date
+Received date
+Purchase Order Items Table
+
+The purchase order items table stores products included in purchase orders.
+
+It includes:
+
+Item ID
+Purchase order
+Product
+Quantity
+Unit price
+Inventory Logs Table
+
+The inventory logs table stores inventory-related audit information.
+
+It includes:
+
+Log ID
+Product
+Action
+Details
+User
+Created date
+🔐 User Roles
+
+The application supports three user roles.
+
+👑 Admin
+
+Admin users can access the major inventory management features.
+
+Admin functionality includes:
+
+Product management
+Inventory management
+Stock management
+Supplier management
+Purchase order management
+Warehouse management
+Reports
+👨‍💼 Manager
+
+Manager users can work with inventory operations and management features according to their assigned permissions.
+
+Manager functionality includes:
+
+Inventory management
+Stock operations
+Supplier management
+Purchase orders
+Reports
+👷 Staff
+
+Staff users can access permitted inventory and stock-related functionality according to their assigned permissions.
+
+👤 Demo Credentials
+
+The application includes demo users for testing.
+
+Role	Email	Password
+Admin	admin@inventory.local	Admin@123
+Manager	manager@inventory.local	Manager@123
+Staff	staff@inventory.local	Staff@123
+
+These credentials are intended for local development and testing.
+
+Passwords are stored using bcrypt hashing.
+
+⚙️ Installation
+Requirements
+
+Before running the project, install:
+
+Node.js 18 or later
+npm
+Git
+VS Code
+1. Clone the Repository
+
+Clone the GitHub repository:
+
+git clone https://github.com/Pavani-2116/SmartInventoryWarehouse.git
+
+Move into the project directory:
+
+cd SmartInventoryWarehouse
+2. Backend Setup
+
+Open a terminal and go to the backend folder:
+
+cd backend
+
+Install backend dependencies:
+
+npm install
+Create Backend Environment File
+Windows
+copy .env.example .env
+macOS / Linux
+cp .env.example .env
+Initialize Database
+
+Run:
+
+npm run db:init
+
+This creates the SQLite database and database tables.
+
+Add Demo Data
+
+Run:
+
+npm run db:seed
+
+This inserts demo users, products, suppliers, warehouses, and other sample data.
+
+Start Backend
+
+Run:
+
+npm run dev
+
+The backend runs at:
+
+http://localhost:5000
+3. Frontend Setup
+
+Open another terminal.
+
+From the project root, go to the frontend:
+
+cd frontend
+
+Install frontend dependencies:
+
+npm install
+Create Frontend Environment File
+Windows
+copy .env.example .env
+macOS / Linux
+cp .env.example .env
+Start Frontend
+
+Run:
+
+npm run dev
+
+The frontend normally runs at:
+
+http://localhost:5173
+🔑 Environment Variables
+Backend .env
 PORT=5000
-DATABASE_PATH=./database/warehouse.db
+DATABASE_PATH=./database/inventory.sqlite
 JWT_SECRET=change-this-in-production
 CLIENT_URL=http://localhost:5173
-```
-
-Frontend `.env`:
-
-```text
+Frontend .env
 VITE_API_URL=http://localhost:5000/api
-```
 
-Do not commit `.env` or real secrets.
+Do not commit .env files or real production secrets to GitHub.
 
-## Stock Integrity
+📊 Dashboard
 
-Stock IN/OUT is performed in one SQLite transaction:
+The dashboard provides a centralized view of the inventory system.
 
-1. Read current stock
-2. Validate requested quantity
-3. Calculate new stock
-4. Update product quantity
-5. Insert stock movement
-6. Insert audit log
-7. Commit
+It displays:
 
-Any failure rolls the transaction back.
+Total products
+Total stock
+Low-stock products
+Out-of-stock information
+Warehouse count
+Supplier count
+Stock IN information
+Stock OUT information
+Inventory statistics
+Charts
 
-Stock OUT example: if current stock is 10 and requested OUT is 15, the operation returns an error and stock remains 10.
+The dashboard helps users quickly understand the current inventory situation.
 
-## Purchase Order Receiving
+📦 Inventory Management
 
-When a purchase order changes to `Received`, its items are added to inventory in a transaction and stock movements/audit logs are created. A received order cannot be received again, preventing double-addition.
+The Inventory page allows authorized users to manage products.
 
-## Evaluation Mapping
+Users can:
 
-### Feature completeness — 25
-Products, stock lifecycle, suppliers, purchase orders, warehouses, alerts, history, reports and filters are implemented.
+View products
+Add products
+Edit products
+Delete products
+View product SKU
+View product category
+View product quantity
+View product price
+View warehouse
+View supplier
+Filter inventory
+Identify low-stock products
+🔄 Stock Management
 
-### Backend quality — 20
-Express REST APIs, RBAC, validation, transactional stock operations, centralized error handling and safe purchase-order receiving.
+The system supports two main stock operations.
 
-### Frontend UI/UX — 20
-Responsive dashboard, KPI cards, charts, tables, filters, modals, alerts, mobile navigation and feedback states.
+Stock IN
 
-### Database design — 15
-Normalized relational schema, foreign keys, indexes, stock history, audit logs and SQLite transactions.
+Stock IN increases the available stock of a product.
 
-### Code quality — 10
-Modular routes/controllers/services, reusable React components and centralized API/auth handling.
+Example:
 
-### Deployment — 10
-The frontend has a production build and the backend is Node-compatible. SQLite requires persistent storage in production.
+Current Stock = 10
+Stock IN = 5
 
-## Deployment Notes
+New Stock = 15
+Stock OUT
 
-For evaluation, deploy the Node backend on a service with persistent disk/storage for SQLite, and deploy the Vite frontend on a static React host. Set:
+Stock OUT decreases the available stock.
 
-- Backend `DATABASE_PATH` to a persistent location
-- Backend `JWT_SECRET` to a strong secret
-- Backend `CLIENT_URL` to the frontend origin
-- Frontend `VITE_API_URL` to the deployed API
+Example:
 
-Do not use an ephemeral filesystem for the SQLite database, or data may disappear after a restart.
+Current Stock = 10
+Stock OUT = 3
 
-## Submission Checklist
+New Stock = 7
+🚫 Negative Stock Prevention
 
-GitHub Repository:
-`<URL>`
+The system prevents users from removing more stock than is currently available.
 
-Deployed Application:
-`<URL>`
+For example:
 
-Video Recording:
-`<URL>`
+Current Stock = 10
+Requested Stock OUT = 15
 
-Before submission, verify login, CRUD flows, stock IN/OUT, negative-stock rejection, purchase receiving, persistence after refresh, reports, responsive layouts, deployment and the 5–8 minute demo video.
+The operation is rejected.
 
-## Known Limitations
+The stock remains:
 
-- Barcode scanning is a SKU-input simulation rather than hardware integration.
-- Predictive restocking is intentionally a lightweight explainable estimate and can be added as a future enhancement.
-- The dashboard refreshes immediately after successful operations; no WebSocket layer is required by the assignment.
+10
 
-## Future Enhancements
+This prevents negative inventory quantities.
 
-- Advanced predictive restocking
-- Real barcode/camera scanning
-- CSV/PDF report scheduling
-- Warehouse-to-warehouse transfers
-- Fine-grained permissions
-- Notification integrations
+📋 Stock Movement History
 
-## Production SQLite Structure
+The Stock Movements page provides a history of inventory operations.
 
-The project now uses a production-style SQLite setup:
+Each movement contains information such as:
 
-- `backend/database/schema.sql` — relational schema, constraints, foreign keys and indexes.
-- `backend/database/db.js` — SQLite connection configured with foreign keys, WAL and busy timeout.
-- `backend/database/seed.js` — realistic demo users, warehouses, suppliers, products and opening stock.
-- `backend/database/inventory.sqlite` — generated locally by the database initialization command.
-- Stock changes should be performed inside backend transactions so quantity and movement history stay consistent.
-- Foreign keys protect product, supplier, warehouse and purchase-order relationships.
-- `products.quantity >= 0` and movement quantity constraints prevent invalid values at database level.
+Product
+Movement type
+Quantity
+Warehouse
+User
+Reference
+Date
 
-### Database commands
+Movement types include:
 
-```bash
-cd backend
-npm install
-npm run db:init
-npm run db:seed
-npm run dev
-```
+IN
+OUT
 
-`db:init` creates the schema. `db:seed` inserts demo records. Do not commit a private production database containing real credentials or customer data.
+This creates an audit trail for inventory changes.
+
+🏢 Warehouse Management
+
+The Warehouse page allows authorized users to manage warehouses.
+
+Warehouse information includes:
+
+Warehouse name
+Warehouse code
+Location
+Current stock
+Product count
+Low-stock information
+
+Users can:
+
+Add warehouses
+View warehouses
+Edit warehouses
+Delete warehouses
+🚚 Supplier Management
+
+The Supplier page allows users to manage supplier information.
+
+Supplier information includes:
+
+Supplier name
+Email
+Phone
+Address
+
+Available operations:
+
+Add supplier
+View supplier
+Edit supplier
+Delete supplier
+🧾 Purchase Orders
+
+The Purchase Orders page allows users to manage product purchasing.
+
+Users can:
+
+Create purchase orders
+Select suppliers
+Select warehouses
+Select products
+Set product quantities
+Set unit prices
+View purchase orders
+Receive purchase orders
+
+When a purchase order is received, the backend updates the inventory.
+
+📈 Reports
+
+The Reports page provides inventory information and stock-related reports.
+
+Available reports include:
+
+Inventory report
+Stock movement report
+Low-stock report
+
+The application also supports CSV export for report data.
+
+🔗 REST API
+
+The frontend communicates with the backend through REST APIs.
+
+Authentication APIs
+POST /api/auth/login
+GET  /api/auth/me
+Product APIs
+GET    /api/products
+GET    /api/products/:id
+POST   /api/products
+PUT    /api/products/:id
+DELETE /api/products/:id
+Stock APIs
+POST /api/stock/in
+POST /api/stock/out
+GET  /api/stock/movements
+Supplier APIs
+GET    /api/suppliers
+POST   /api/suppliers
+PUT    /api/suppliers/:id
+DELETE /api/suppliers/:id
+Warehouse APIs
+GET    /api/warehouses
+POST   /api/warehouses
+PUT    /api/warehouses/:id
+DELETE /api/warehouses/:id
+Purchase Order APIs
+GET  /api/purchase-orders
+POST /api/purchase-orders
+PUT  /api/purchase-orders/:id
+Dashboard API
+GET /api/dashboard/summary
+Reports APIs
+GET /api/reports/inventory
+GET /api/reports/movements
+GET /api/reports/low-stock
+🔒 Security
+
+The application includes:
+
+JWT authentication
+Password hashing using bcrypt
+Protected frontend routes
+Protected backend APIs
+Role-based authorization
+Backend validation
+SQLite constraints
+Negative-stock prevention
+Environment variables for configuration
+
+Sensitive environment files are excluded from Git.
+
+Local SQLite database files are also excluded from Git.
+
+
+🌐 GitHub Repository
+
+Repository:
+
+https://github.com/Pavani-2116/SmartInventoryWarehouse
+
+🚀 Future Enhancements
+
+Possible future improvements include:
+
+Real barcode scanner integration
+Camera-based barcode scanning
+Warehouse-to-warehouse stock transfers
+Advanced inventory analytics
+Automated low-stock notifications
+Predictive restocking
+PDF report generation
+Email notifications
+Fine-grained user permissions
+Cloud database support
+Advanced dashboard analytics
+Inventory forecasting
+Automated purchase recommendations
+💡 Learning Outcomes
+
+This project demonstrates practical knowledge of:
+
+React.js
+Component-based development
+React Router
+REST API integration
+Axios
+Node.js
+Express.js
+JWT authentication
+Role-based authorization
+Password hashing
+SQLite
+SQL database design
+CRUD operations
+Inventory management
+Stock validation
+API development
+Git
+GitHub
+Environment variables
+Responsive UI development
+Production builds
+👩‍💻 Author
+Pavani Mada
+
+B.Tech Computer Science Engineering
+
+GitHub
+
+https://github.com/Pavani-2116
+
+Project Repository
+
+https://github.com/Pavani-2116/SmartInventoryWarehouse
+
+📄 License
+
+This project was developed for learning, demonstration, and evaluation purposes.
+
+
+**This is the complete README in one block.** Copy the whole block into `README.md`, replacing the old content.
