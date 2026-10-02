@@ -1,14 +1,15 @@
 const db = require('./db');
+const { hashPassword } = require('../src/utils/auth');
 
 db.pragma('foreign_keys = ON');
 
 const seed = db.transaction(() => {
   // Users
   const users = [
-    ['Admin User', 'admin@inventory.local', 'Admin@123', 'admin'],
-    ['Warehouse Manager', 'manager@inventory.local', 'Manager@123', 'manager'],
-    ['Warehouse Staff', 'staff@inventory.local', 'Staff@123', 'staff']
-  ];
+  ['Admin User', 'admin@inventory.local', hashPassword('Admin@123'), 'admin'],
+  ['Warehouse Manager', 'manager@inventory.local', hashPassword('Manager@123'), 'manager'],
+  ['Warehouse Staff', 'staff@inventory.local', hashPassword('Staff@123'), 'staff']
+];
 
   const insertUser = db.prepare(`
     INSERT OR IGNORE INTO users
